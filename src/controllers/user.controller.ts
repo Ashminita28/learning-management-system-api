@@ -1,9 +1,23 @@
 import { Request, Response } from "express";
 import * as userService from "../services/user.service";
+import { AuthRequest } from "../middlewares/auth.middlewares";
  
 
 export const createUser = async (req: Request, res: Response) => {
   try {
+    // const requestUserId=Number(req.params.id);
+    // const loggedInUserId=req.user.userId;
+    // if(requestUserId!==loggedInUserId){
+    //   return res.status(403).json({
+    //     message:"Forbidden:Access denied"
+    //   });
+    // }
+
+    // const user=await userService.getUserByIdService(requestUserId);
+    // if(!user){
+    //   return res.status(404).json({message:"User not found"});
+    // }
+    // res.status(200).json(user);
     const userId = await userService.createUserService(req.body);
     res.status(201).json({
       message: "User created successfully",
@@ -48,16 +62,21 @@ export const getUserById = async (req: Request, res: Response) => {
 };
  
 
-export const updateUser = async (req: Request, res: Response) => {
+export const updateUser = async (req: AuthRequest, res: Response) => {
   try {
+    const requestUserId=Number(req.params.id);
+    const loggedInUserId=req.user.userId;
+    if(requestUserId!==loggedInUserId){
+      return res.status(403).json({
+        message:"Forbidden:Access denied"
+      });
+    }
     await userService.updateUserService(
-      Number(req.params.id),
+      requestUserId,
       req.body
     );
- 
-    res.status(200).json({
-      message: "User updated successfully",
-    });
+
+    res.json({message:"User updated successfully!!"});
   } catch (error: any) {
     res.status(500).json({
       message: error.message,
@@ -66,13 +85,18 @@ export const updateUser = async (req: Request, res: Response) => {
 };
  
 
-export const deleteUser = async (req: Request, res: Response) => {
+export const deleteUser = async (req: AuthRequest, res: Response) => {
   try {
-    await userService.deleteUserService(Number(req.params.id));
- 
-    res.status(200).json({
-      message: "User deleted successfully",
-    });
+   const requestUserId=Number(req.params.id);
+    const loggedInUserId=req.user.userId;
+    if(requestUserId!==loggedInUserId){
+      return res.status(403).json({
+        message:"Forbidden: Access denied",
+      });
+    }
+
+    await userService.deleteUserService(requestUserId);
+    res.json({message:"User deleted successfully!!"});
   } catch (error: any) {
     res.status(500).json({
       message: error.message,

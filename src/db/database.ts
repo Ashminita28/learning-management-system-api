@@ -11,6 +11,7 @@ export const db=new sqlite3.Database(":memory:",(err:Error|null)=>{
     }
 });
 
+
 db.serialize(()=>{
     db.run(
         `
@@ -58,7 +59,8 @@ db.serialize(()=>{
              courseId INTEGER NOT NULL,
              title TEXT NOT NULL,
              isDeleted INTEGER DEFAULT 0,
-             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+             FOREIGN KEY(courseId) REFERENCES courses(id) ON DELETE CASCADE
         )
         `
         ,
@@ -78,7 +80,8 @@ db.serialize(()=>{
              title TEXT NOT NULL,
              content TEXT,
              isDeleted INTEGER DEFAULT 0,
-             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+             FOREIGN KEY(moduleId) REFERENCES modules(id) ON DELETE CASCADE
         )
         `
         ,
@@ -96,9 +99,12 @@ db.serialize(()=>{
              id INTEGER PRIMARY KEY AUTOINCREMENT,
              userId INTEGER NOT NULL,
              courseId INTEGER NOT NULL,
-             enrollmentDate TEXT NOT NULL,
+             enrollmentDate DATETIME DEFAULT CURRENT_TIMESTAMP,
              isDeleted INTEGER DEFAULT 0,
-             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+             createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+             FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
+             FOREIGN KEY (courseId) REFERENCES courses(id) ON DELETE CASCADE,
+             UNIQUE(userId,courseId)
         )
         `
         ,
