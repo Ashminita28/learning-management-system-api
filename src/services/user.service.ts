@@ -1,4 +1,7 @@
 import * as userModel from "../models/user.model";
+import bcrypt from 'bcrypt';
+
+const salt_rounds=10
  
 
 export const createUserService = async (data: {
@@ -7,9 +10,12 @@ export const createUserService = async (data: {
   password: string;
 }) => {
   const { name, email, password } = data;
- 
+  const hashedPassword=await bcrypt.hash(password,salt_rounds);
+ if(!data.email.includes("@")){
+    throw new Error("Invalid email format");
+ }
   
-  const userId = await userModel.createUser(name, email, password);
+  const userId = await userModel.createUser(data.name, data.email, hashedPassword);
  
   return userId;
 };

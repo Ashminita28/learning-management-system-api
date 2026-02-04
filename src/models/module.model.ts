@@ -1,18 +1,17 @@
 import { db } from "../db/database";
  
 
-export const createUser = (
-  name: string,
-  email: string,
-  password: string
+export const createModule = (
+  title: string,
+  description: string,
 ): Promise<number> => {
   return new Promise((resolve, reject) => {
     const query = `
-      INSERT INTO users (name, email, password)
-      VALUES (?, ?, ?)
+      INSERT INTO modules (courseId,title)
+      VALUES (?, ?)
     `;
  
-    db.run(query, [name, email, password], function (err: Error | null) {
+    db.run(query, [title,description], function (err: Error | null) {
       if (err) {
         reject(err);
       } else {
@@ -23,11 +22,11 @@ export const createUser = (
 };
  
 
-export const getAllUsers = (): Promise<any[]> => {
+export const getAllModules = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
     const query = `
-      SELECT id, name, email, createdAt
-      FROM users
+      SELECT id, courseId, title, createdAt
+      FROM modules
       WHERE isDeleted = 0
     `;
  
@@ -42,11 +41,11 @@ export const getAllUsers = (): Promise<any[]> => {
 };
  
 
-export const getUserById = (id: number): Promise<any> => {
+export const getModuleById = (id: number): Promise<any> => {
   return new Promise((resolve, reject) => {
     const query = `
-      SELECT id, name, email, createdAt
-      FROM users
+      SELECT id, courseId, title, createdAt
+      FROM modules
       WHERE id = ? AND isDeleted = 0
     `;
  
@@ -61,19 +60,19 @@ export const getUserById = (id: number): Promise<any> => {
 };
  
 
-export const updateUser = (
+export const updateModule = (
   id: number,
-  name: string,
-  email: string
+  title: string,
+  description: string
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     const query = `
-      UPDATE users
-      SET name = ?, email = ?
+      UPDATE modules
+      SET title = ?, 
       WHERE id = ? AND isDeleted = 0
     `;
  
-    db.run(query, [name, email, id], (err: Error | null) => {
+    db.run(query, [title, description, id], (err: Error | null) => {
       if (err) {
         reject(err);
       } else {
@@ -84,10 +83,10 @@ export const updateUser = (
 };
  
 
-export const deleteUser = (id: number): Promise<void> => {
+export const deleteModule = (id: number): Promise<void> => {
   return new Promise((resolve, reject) => {
     const query = `
-      UPDATE users
+      UPDATE modules
       SET isDeleted = 1
       WHERE id = ?
     `;
@@ -99,18 +98,5 @@ export const deleteUser = (id: number): Promise<void> => {
         resolve();
       }
     });
-  });
-};
-
-export const getUserByEmail=(email:string):Promise<any> =>{
-  return new Promise((resolve,reject)=>{
-    db.get(
-      `SELECT * FROM users WHERE email=? AND isDeleted=0`,
-      [email],
-      (err:Error|null,row:any)=>{
-        if(err) reject(err);
-        else resolve(row);
-      }
-    );
   });
 };
