@@ -22,6 +22,7 @@ export const loginService=async(data:{
   const accessToken=generateAccessToken({
     userId:user.id,
     email:user.email,
+    role:user.role
   })
 
   return{

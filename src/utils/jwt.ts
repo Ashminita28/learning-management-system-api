@@ -6,6 +6,7 @@ const ACCESS_TOKEN_EXPIRY="15m";
 export const generateAccessToken=(payload:{
     userId:number;
     email:string;
+    role:string;
 })=>{
     return jwt.sign(payload,JWT_SECRET,{expiresIn:ACCESS_TOKEN_EXPIRY});
 };

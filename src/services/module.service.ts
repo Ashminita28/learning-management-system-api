@@ -2,12 +2,12 @@ import * as moduleModel from '../models/module.model'
  
 
 export const createModuleService = async (data: {
+  courseId:number,
   title: string,
-  description: string,
 }) => {
-  const { title,description } = data;
+  const { courseId,title } = data;
  
-  const moduleId = await moduleModel.createModule(title,description);
+  const moduleId = await moduleModel.createModule(courseId,title);
  
   return moduleId;
 };
@@ -27,10 +27,10 @@ export const getModuleByIdService = async (id: number) => {
 
 export const updateModuleService = async (
   id: number,
-  data: { title: string,
-  description: string }
+  data: { courseId:number,
+  title: string }
 ) => {
-  await moduleModel.updateModule(id, data.title, data.description);
+  await moduleModel.updateModule(id, data.courseId, data.title);
 };
  
 

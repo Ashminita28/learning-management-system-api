@@ -2,12 +2,13 @@ import * as lessonModel from '../models/lesson.model'
  
 
 export const createLessonService = async (data: {
+  moduleId:number,
   title: string,
   description: string,
 }) => {
-  const { title,description } = data;
+  const { moduleId,title,description } = data;
  
-  const lessonId = await lessonModel.createLesson(title,description);
+  const lessonId = await lessonModel.createLesson(moduleId,title,description);
  
   return lessonId;
 };
@@ -27,10 +28,11 @@ export const getLessonByIdService = async (id: number) => {
 
 export const updateLessonService = async (
   id: number,
-  data: { title: string,
-  description: string }
+  data: { moduleId:number,
+  title:string,
+  content:string }
 ) => {
-  await lessonModel.updateLesson(id, data.title, data.description);
+  await lessonModel.updateLesson(id, data.moduleId, data.title,data.content);
 };
  
 

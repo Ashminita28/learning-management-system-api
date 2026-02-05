@@ -11,7 +11,7 @@ export const db=new sqlite3.Database(":memory:",(err:Error|null)=>{
     }
 });
 
-
+db.run("PRAGMA foreign_keys=ON");
 db.serialize(()=>{
     db.run(
         `
@@ -20,6 +20,7 @@ db.serialize(()=>{
              name TEXT NOT NULL,
              email TEXT UNIQUE NOT NULL,
              password TEXT NOT NULL,
+             role TEXT NOT NULL DEFAULT 'STUDENT',
              isDeleted INTEGER DEFAULT 0,
              createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
         )

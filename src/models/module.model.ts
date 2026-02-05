@@ -2,8 +2,8 @@ import { db } from "../db/database";
  
 
 export const createModule = (
+  courseId:number,
   title: string,
-  description: string,
 ): Promise<number> => {
   return new Promise((resolve, reject) => {
     const query = `
@@ -11,7 +11,7 @@ export const createModule = (
       VALUES (?, ?)
     `;
  
-    db.run(query, [title,description], function (err: Error | null) {
+    db.run(query, [courseId,title], function (err: Error | null) {
       if (err) {
         reject(err);
       } else {
@@ -25,7 +25,7 @@ export const createModule = (
 export const getAllModules = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
     const query = `
-      SELECT id, courseId, title, createdAt
+      SELECT *
       FROM modules
       WHERE isDeleted = 0
     `;
@@ -44,7 +44,7 @@ export const getAllModules = (): Promise<any[]> => {
 export const getModuleById = (id: number): Promise<any> => {
   return new Promise((resolve, reject) => {
     const query = `
-      SELECT id, courseId, title, createdAt
+      SELECT *
       FROM modules
       WHERE id = ? AND isDeleted = 0
     `;
@@ -62,8 +62,8 @@ export const getModuleById = (id: number): Promise<any> => {
 
 export const updateModule = (
   id: number,
+  courseId:number,
   title: string,
-  description: string
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     const query = `
@@ -72,7 +72,7 @@ export const updateModule = (
       WHERE id = ? AND isDeleted = 0
     `;
  
-    db.run(query, [title, description, id], (err: Error | null) => {
+    db.run(query, [courseId,title, id], (err: Error | null) => {
       if (err) {
         reject(err);
       } else {

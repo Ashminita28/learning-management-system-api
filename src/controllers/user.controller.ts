@@ -103,3 +103,8 @@ export const deleteUser = async (req: AuthRequest, res: Response) => {
     });
   }
 }
+
+export const getMe=async(req:AuthRequest,res:Response)=>{
+  const user=await userService.getUserByIdService(req.user.userId);
+  res.json(user);
+}

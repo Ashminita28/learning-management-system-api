@@ -25,8 +25,7 @@ export const createCourse = (
 export const getAllCourses = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
     const query = `
-      SELECT id, title, description, createdAt
-      FROM courses
+      SELECT * FROM courses
       WHERE isDeleted = 0
     `;
  
@@ -44,7 +43,7 @@ export const getAllCourses = (): Promise<any[]> => {
 export const getCourseById = (id: number): Promise<any> => {
   return new Promise((resolve, reject) => {
     const query = `
-      SELECT id, title, description, createdAt
+      SELECT *
       FROM courses
       WHERE id = ? AND isDeleted = 0
     `;

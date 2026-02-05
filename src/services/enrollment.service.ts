@@ -2,12 +2,12 @@ import * as enrollmentModel from '../models/enrollment.model'
  
 
 export const createEnrollmentService = async (data: {
-  title: string,
-  description: string,
+  userId: number,
+  courseId: number,
 }) => {
-  const { title,description } = data;
+  const { userId,courseId} = data;
  
-  const enrollmentId = await enrollmentModel.createEnrollment(title,description);
+  const enrollmentId = await enrollmentModel.createEnrollment(userId,courseId);
  
   return enrollmentId;
 };
@@ -27,10 +27,10 @@ export const getEnrollmentByIdService = async (id: number) => {
 
 export const updateEnrollmentService = async (
   id: number,
-  data: { title: string,
-  description: string }
+  data: { userId: number,
+  courseId: number}
 ) => {
-  await enrollmentModel.updateEnrollment(id, data.title, data.description);
+  await enrollmentModel.updateEnrollment(id, data.userId, data.courseId);
 };
  
 

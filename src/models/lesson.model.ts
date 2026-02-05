@@ -2,16 +2,17 @@ import { db } from "../db/database";
  
 
 export const createLesson = (
-  title: string,
-  description: string,
+  moduleId:number,
+  title:string,
+  content:string
 ): Promise<number> => {
   return new Promise((resolve, reject) => {
     const query = `
-      INSERT INTO lessons (title,description)
-      VALUES (?, ?)
+      INSERT INTO lessons (moduleId,title,content)
+      VALUES (?, ?, ?)
     `;
  
-    db.run(query, [title,description], function (err: Error | null) {
+    db.run(query, [moduleId,title,content], function (err: Error | null) {
       if (err) {
         reject(err);
       } else {
@@ -25,7 +26,7 @@ export const createLesson = (
 export const getAllLessons = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
     const query = `
-      SELECT id, title, description, createdAt
+      SELECT *
       FROM lessons
       WHERE isDeleted = 0
     `;
@@ -44,9 +45,9 @@ export const getAllLessons = (): Promise<any[]> => {
 export const getLessonById = (id: number): Promise<any> => {
   return new Promise((resolve, reject) => {
     const query = `
-      SELECT id, title, description, createdAt
+      SELECT *
       FROM lessons
-      WHERE id = ? AND isDeleted = 0
+      WHERE moduleId = ? AND isDeleted = 0
     `;
  
     db.get(query, [id], (err: Error | null, row: any) => {
@@ -62,17 +63,18 @@ export const getLessonById = (id: number): Promise<any> => {
 
 export const updateLesson = (
   id: number,
-  title: string,
-  description: string
+  moduleId:number,
+  title:string,
+  content:string
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     const query = `
       UPDATE lessons
-      SET title = ?, description = ?
+      SET title = ?, content = ?
       WHERE id = ? AND isDeleted = 0
     `;
  
-    db.run(query, [title, description, id], (err: Error | null) => {
+    db.run(query, [moduleId,title, content, id], (err: Error | null) => {
       if (err) {
         reject(err);
       } else {

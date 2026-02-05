@@ -2,16 +2,16 @@ import { db } from "../db/database";
  
 
 export const createEnrollment = (
-  title: string,
-  description: string,
+  userId: number,
+  courseId: number,
 ): Promise<number> => {
   return new Promise((resolve, reject) => {
     const query = `
-      INSERT INTO enrollments (title,description)
+      INSERT INTO enrollments (userId ,courseId)
       VALUES (?, ?)
     `;
  
-    db.run(query, [title,description], function (err: Error | null) {
+    db.run(query, [userId,courseId], function (err: Error | null) {
       if (err) {
         reject(err);
       } else {
@@ -25,7 +25,7 @@ export const createEnrollment = (
 export const getAllEnrollments = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
     const query = `
-      SELECT id, title, description, createdAt
+      SELECT *
       FROM enrollments
       WHERE isDeleted = 0
     `;
@@ -44,7 +44,7 @@ export const getAllEnrollments = (): Promise<any[]> => {
 export const getEnrollmentById = (id: number): Promise<any> => {
   return new Promise((resolve, reject) => {
     const query = `
-      SELECT id, title, description, createdAt
+      SELECT *
       FROM enrollments
       WHERE id = ? AND isDeleted = 0
     `;
@@ -62,8 +62,8 @@ export const getEnrollmentById = (id: number): Promise<any> => {
 
 export const updateEnrollment = (
   id: number,
-  title: string,
-  description: string
+  userId: number,
+  courseId: number
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     const query = `
@@ -72,7 +72,7 @@ export const updateEnrollment = (
       WHERE id = ? AND isDeleted = 0
     `;
  
-    db.run(query, [title, description, id], (err: Error | null) => {
+    db.run(query, [userId, courseId, id], (err: Error | null) => {
       if (err) {
         reject(err);
       } else {

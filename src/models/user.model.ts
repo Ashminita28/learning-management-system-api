@@ -4,15 +4,16 @@ import { db } from "../db/database";
 export const createUser = (
   name: string,
   email: string,
-  password: string
+  password: string,
+  role:string
 ): Promise<number> => {
   return new Promise((resolve, reject) => {
     const query = `
-      INSERT INTO users (name, email, password)
-      VALUES (?, ?, ?)
+      INSERT INTO users (name, email, password,role)
+      VALUES (?, ?, ?, ?)
     `;
  
-    db.run(query, [name, email, password], function (err: Error | null) {
+    db.run(query, [name, email, password,role], function (err: Error | null) {
       if (err) {
         reject(err);
       } else {
@@ -45,7 +46,7 @@ export const getAllUsers = (): Promise<any[]> => {
 export const getUserById = (id: number): Promise<any> => {
   return new Promise((resolve, reject) => {
     const query = `
-      SELECT id, name, email, createdAt
+      SELECT id, name, email, role, createdAt
       FROM users
       WHERE id = ? AND isDeleted = 0
     `;
