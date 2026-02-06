@@ -10,6 +10,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 import path from 'path';
 
+// SWAGGER API
 const swaggerDefinition = {
     openapi: '3.0.0',
     info: {
@@ -52,12 +53,12 @@ const options = {
     // Paths to files containing OpenAPI definitions
     apis: [path.join(__dirname, 'routes', '*.ts')],
 };
-
 const swaggerSpec = swaggerJSDoc(options);
 
 const app = express();
 app.use(express.json());
 
+// ROUTES
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(courseRoutes);
@@ -66,5 +67,7 @@ app.use(lessonRoutes);
 app.use(enrollmentRoutes);
 
 console.log(Object.keys(swaggerSpec.paths || {}));
+
+// DISPLAY THE SWAGGER UI
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 export default app;

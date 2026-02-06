@@ -7,7 +7,7 @@ const lessonRoutes = Router();
 
 /**
  * @swagger
- * /lessons:
+ * /api/lessons:
  *   post:
  *     summary: create lesson
  *     tags:
@@ -35,7 +35,7 @@ lessonRoutes.post('/api/lessons', authenticate, requireRole(['educator', 'admin'
 
 /**
  * @swagger
- * /lessons:
+ * /api/lessons:
  *   get:
  *     summary: get lesson
  *     tags:
@@ -50,7 +50,7 @@ lessonRoutes.get('/api/lessons', authenticate, requireRole(['student', 'educator
 
 /**
  * @swagger
- * /lessons/{id}:
+ * /api/lessons/{id}:
  *   get:
  *     summary: get lesson by id
  *     tags:
@@ -72,7 +72,7 @@ lessonRoutes.get('/api/lessons/:id', authenticate, requireRole(['student', 'educ
 
 /**
  * @swagger
- * /lessons/{id}:
+ * /api/lessons/{id}:
  *   put:
  *     summary: update lesson
  *     tags:
@@ -107,7 +107,7 @@ lessonRoutes.put('/api/lessons/:id', authenticate, requireRole(['educator', 'adm
 
 /**
  * @swagger
- * /lessons/{id}:
+ * /api/lessons/{id}:
  *   delete:
  *     summary: delete lesson
  *     tags:

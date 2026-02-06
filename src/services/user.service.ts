@@ -3,13 +3,13 @@ import bcrypt from 'bcrypt';
 
 const salt_rounds = 10;
 
-export const createUserService = async (data: { name: string; email: string; password: string; roles?: 'student' | 'educator' | 'admin' }) => {
-    const { name, email, password, roles } = data;
+export const createUserService = async (data: { name: string; email: string; password: string; role?: string }) => {
+    const { name, email, password } = data;
     const hashedPassword = await bcrypt.hash(password, salt_rounds);
     if (!data.email.includes('@')) {
         throw new Error('Invalid email format');
     }
-    const role = data.roles && ['student', 'educator', 'admin'].includes(data.roles) ? data.roles : 'admin';
+    const role = data.role && ['student', 'educator', 'admin'].includes(data.role) ? data.role : 'student';
 
     const userId = await userModel.createUser(data.name, data.email, hashedPassword, role);
 

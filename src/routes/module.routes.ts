@@ -7,7 +7,7 @@ const moduleRoutes = Router();
 
 /**
  * @swagger
- * /modules:
+ * /api/modules:
  *   post:
  *     summary: create module
  *     tags:
@@ -33,7 +33,7 @@ moduleRoutes.post('/api/modules', authenticate, requireRole(['educator', 'admin'
 
 /**
  * @swagger
- * /modules:
+ * /api/modules:
  *   get:
  *     summary: get all modules
  *     tags:
@@ -48,7 +48,7 @@ moduleRoutes.get('/api/modules', authenticate, requireRole(['student', 'educator
 
 /**
  * @swagger
- * /modules/{id}:
+ * /api/modules/{id}:
  *   get:
  *     summary: get module by id
  *     tags:
@@ -70,7 +70,7 @@ moduleRoutes.get('/api/modules/:id', authenticate, requireRole(['student', 'educ
 
 /**
  * @swagger
- * /modules/{id}:
+ * /api/modules/{id}:
  *   put:
  *     summary: update module
  *     tags:
@@ -103,7 +103,7 @@ moduleRoutes.put('/api/modules/:id', authenticate, requireRole(['educator', 'adm
 
 /**
  * @swagger
- * /modules/{id}:
+ * /api/modules/{id}:
  *   delete:
  *     summary: delete module
  *     tags:

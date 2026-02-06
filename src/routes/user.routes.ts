@@ -18,7 +18,7 @@ const userRoutes = Router();
  *       200:
  *         description: all user data
  */
-userRoutes.get('/api/users', authenticate, requireRole(['ADMIN']), userController.getAllUsers);
+userRoutes.get('/api/users', authenticate, requireRole(['admin']), userController.getAllUsers);
 
 /**
  * @swagger
@@ -57,7 +57,7 @@ userRoutes.get('/api/users/me', authenticate, userController.getMe);
  *       404:
  *         description: user not found
  */
-userRoutes.get('/api/users/:id', authenticate, requireRole(['ADMIN']), userController.getUserById);
+userRoutes.get('/api/users/:id', authenticate, requireRole(['admin']), userController.getUserById);
 
 /**
  * @swagger

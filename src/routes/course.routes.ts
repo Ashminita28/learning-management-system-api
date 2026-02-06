@@ -7,7 +7,7 @@ const courseRoutes = Router();
 
 /**
  * @swagger
- * /courses:
+ * /api/courses:
  *   post:
  *     summary: create course
  *     tags:
@@ -33,7 +33,7 @@ courseRoutes.post('/api/courses', authenticate, requireRole(['educator', 'admin'
 
 /**
  * @swagger
- * /courses:
+ * /api/courses:
  *   get:
  *     summary: get all courses
  *     tags:
@@ -55,7 +55,7 @@ courseRoutes.get('/api/courses', courseController.getAllCourses);
 
 /**
  * @swagger
- * /courses/{id}:
+ * /api/courses/{id}:
  *   get:
  *     summary: get course by id
  *     tags:
@@ -77,7 +77,7 @@ courseRoutes.get('/api/courses/:id', authenticate, courseController.getCourseByI
 
 /**
  * @swagger
- * /courses/{id}:
+ * /api/courses/{id}:
  *   put:
  *     summary: update course
  *     tags:
@@ -110,7 +110,7 @@ courseRoutes.put('/api/courses/:id', authenticate, requireRole(['educator', 'adm
 
 /**
  * @swagger
- * /courses/{id}:
+ * /api/courses/{id}:
  *   delete:
  *     summary: delete course
  *     tags:

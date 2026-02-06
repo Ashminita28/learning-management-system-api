@@ -54,7 +54,6 @@ authRoutes.post('/api/auth/login', login);
  *                 type: string
  *               role:
  *                 type: string
- *                 example: admin
  *     responses:
  *       200:
  *         description: Registeration successful

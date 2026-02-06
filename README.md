@@ -19,21 +19,13 @@ This project is ideal for developers looking to build a custom LMS frontend or i
 ## 🛠️ Tech Stack
 
 **Backend:**
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=json-web-tokens)
+Node.js , Express.js, TypeScript, JWT
 
-<!-- **Database:**
-![SQLite](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white) -->
+**Database:**
+SQLite Node.js
 
 **Tools:**
-![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
-![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
-![Prettier](https://img.shields.io/badge/Prettier-F7BA3E?style=for-the-badge&logo=prettier&logoColor=black)
-![Husky](https://img.shields.io/badge/Husky-black?style=for-the-badge&logo=husky&logoColor=white)
-![Commitlint](https://img.shields.io/badge/Commitlint-gray?style=for-the-badge)
-![Nodemon](https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=nodemon&logoColor=white)
+npm, ESLint, Prettier, Husky, Commitlint, Nodemon
 
 ## 🚀 Quick Start
 
@@ -92,14 +84,14 @@ This project is ideal for developers looking to build a custom LMS frontend or i
 ```
 learning-management-system-api/
 ├── src/                        # Main application source code
-│   ├── config/                 # Configuration files (e.g., database connection)
+│   ├── app.ts                 # Main entry point for the routes
 │   ├── controllers/            # Request handlers for API endpoints
 │   ├── middleware/             # Express middleware (e.g., authentication, error handling)
 │   ├── models/                 # Mongoose schemas and models
 │   ├── routes/                 # API route definitions
 │   ├── services/               # Business logic and data manipulation
 │   ├── utils/                  # Utility functions
-│   └── index.ts                # Main entry point for the API
+│   └── server.ts                # Main entry point for the API
 ├── .husky/                     # Git hooks configuration (pre-commit, commit-msg)
 ├── .commitlintric.json         # Commitlint configuration (for conventional commits)
 ├── commitlint.config.js        # Commitlint configuration
@@ -174,11 +166,6 @@ npm start
 
 This command runs the compiled JavaScript code, typically found in `dist/server.js`.
 
-### Deployment Options
-
-- **Cloud Platforms**: The built `dist` directory can be deployed to any Node.js compatible hosting service (e.g., Heroku, AWS EC2, Google Cloud Run, Vercel, Render). Ensure environment variables are configured in your deployment environment.
-- **Docker**: A `Dockerfile` could be added for containerized deployments.
-
 ## 📚 API Reference
 
 The API endpoints are designed to be intuitive and follow RESTful principles. All endpoints are secured with JWT authentication unless specified.
@@ -194,13 +181,14 @@ The API endpoints are designed to be intuitive and follow RESTful principles. Al
 
 - **`POST /api/auth/register`**: Registers a new user.
 - **`POST /api/auth/login`**: Authenticates a user and returns a JWT token.
-- **`GET /api/auth/me`**: Retrieves the profile of the authenticated user. (Requires JWT)
 
 #### Users
 
 - **`GET /api/users`**: Get all users (Admin only).
-- **`GET /api/users/:id`**: Get a user by ID.
-- **`PUT /api/users/:id`**: Update user profile (User or Admin). (Requires JWT)
+- **`GET /api/users/me`**: Get self data (by using access token).
+- **`GET /api/users/:id`**: Get a user by ID.(Admin only).
+- **`PUT /api/users/me`**: Update self profile.(Requires JWT)
+- **`DELETE /api/users/:id`**: Delete user data by Id.(Admin Only)
 
 #### Courses
 
@@ -221,22 +209,3 @@ The API endpoints are designed to be intuitive and follow RESTful principles. Al
 - **`POST /api/enrollments`**: Enroll a student in a course (Student only). (Requires JWT)
 - **`GET /api/enrollments/my-courses`**: Get courses a student is enrolled in (Student only). (Requires JWT)
 - **`DELETE /api/enrollments/:id`**: Unenroll a student from a course. (Requires JWT)
-
-## 🤝 Contributing
-
-We welcome contributions to the Learning Management System API! Please see our [Contributing Guide](CONTRIBUTING.md) (TODO: Create this file) for details on how to get started, report bugs, or suggest features.
-
-### Development Setup for Contributors
-
-Follow the [Quick Start](#quick-start) guide to set up your local development environment. Ensure you adhere to the project's linting and formatting rules.
-
-## 📄 License
-
-This project is currently unlicensed. Please refer to the repository's status for any future license updates or consider adding a specific license for clarity.
-
-## 🙏 Acknowledgments
-
-- The Node.js community for robust runtime.
-- The TypeScript community for enhanced developer experience.
-- Express.js and Mongoose for simplifying backend development.
-- All contributors and users of this project.

@@ -7,7 +7,7 @@ const enrollmentRoutes = Router();
 
 /**
  * @swagger
- * /enrollments:
+ * /api/enrollments:
  *   post:
  *     summary: create enrollment
  *     tags:
@@ -33,7 +33,7 @@ enrollmentRoutes.post('/api/enrollments', authenticate, requireRole(['student'])
 
 /**
  * @swagger
- * /enrollments:
+ * /api/enrollments:
  *   get:
  *     summary: get all enrollments
  *     tags:
@@ -48,7 +48,7 @@ enrollmentRoutes.get('/api/enrollments', authenticate, requireRole(['admin']), e
 
 /**
  * @swagger
- * /enrollments/{id}:
+ * /api/enrollments/{id}:
  *   get:
  *     summary: get enrollment by id
  *     tags:
@@ -70,7 +70,7 @@ enrollmentRoutes.get('/api/enrollments/:id', authenticate, requireRole(['admin']
 
 /**
  * @swagger
- * /enrollments/{id}:
+ * /api/enrollments/{id}:
  *   delete:
  *     summary: delete enrollment
  *     tags:

@@ -5,10 +5,10 @@ export const db = new sqlite3.Database(':memory:', (err: Error | null) => {
         console.error('failed to connect to database', err.message);
     } else {
         console.log('Sqlite connected');
+        db.run('PRAGMA foreign_keys=ON');
     }
 });
 
-db.run('PRAGMA foreign_keys=ON');
 db.serialize(() => {
     db.run(
         `
@@ -17,7 +17,7 @@ db.serialize(() => {
              name TEXT NOT NULL,
              email TEXT UNIQUE NOT NULL,
              password TEXT NOT NULL,
-             role TEXT NOT NULL DEFAULT 'admin',
+             role TEXT NOT NULL,
              isDeleted INTEGER DEFAULT 0,
              createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
         )
