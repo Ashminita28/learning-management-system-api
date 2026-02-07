@@ -16,7 +16,7 @@ This project is ideal for developers looking to build a custom LMS frontend or i
 - **Robust Data Storage**: Efficient and in memory data storage using SQLite Node.js.
 - **Developer-Friendly**: Clean architecture, consistent code style enforced with ESLint and Prettier, and conventional commit messages.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 **Backend:**
 Node.js , Express.js, TypeScript, JWT
@@ -27,7 +27,7 @@ SQLite Node.js
 **Tools:**
 npm, ESLint, Prettier, Husky, Commitlint, Nodemon
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -65,8 +65,7 @@ npm, ESLint, Prettier, Husky, Commitlint, Nodemon
     | `JWT_SECRET`     | Secret key for signing and verifying JWTs   | Yes      |
     | `JWT_EXPIRATION` | Expiration time for JWTs (e.g., `1d`, `7h`) | No       |
 
-    _Example `.env` content:_
-
+   
     ```
     PORT=5000
     JWT_SECRET=your_super_secret_jwt_key
